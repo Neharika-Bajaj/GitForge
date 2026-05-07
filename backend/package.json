@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Neharika Bajaj",
+  "license": "ISC",
+  "description": "Terminal-Based Git Engine with Custom Command Simulation & Full-Stack API Integration",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.2.2",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.3",
+    "mongodb": "^7.1.1",
+    "mongoose": "^9.3.1",
+    "socket.io": "^4.8.3",
+    "uuid": "^13.0.0",
+    "yargs": "^18.0.0"
+  },
+  "type": "module"
+}
