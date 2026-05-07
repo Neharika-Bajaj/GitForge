@@ -33,7 +33,7 @@ export async function pushRepo(){
         }
 
         // SEND TO BACKEND
-        const res = await fetch("http://localhost:3000/repo/push", {
+        const res = await fetch(`${process.env.SERVER_URL}/repo/push`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

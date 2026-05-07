@@ -6,7 +6,7 @@ export async function pullRepo() {
     const commitsPath = path.join(repoPath, "commits");
 
     try {
-        const res = await fetch("http://localhost:3000/repo/pull");
+        const res = await fetch(`${process.env.SERVER_URL}/repo/pull`);
         const data = await res.json();
 
         for (const commit of data.commits) {

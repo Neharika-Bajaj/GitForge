@@ -65,7 +65,7 @@ function startServer(){
       .catch((err)=>console.error("Error connecting:", err));
 
       app.use(cors({
-    origin: "*",
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
       app.get("/", (req,res)=>{
@@ -78,7 +78,7 @@ function startServer(){
       const httpServer = http.createServer(app);
       const io = new Server(httpServer,{
         cors: {
-            origin:"*",
+            origin:process.env.CLIENT_URL,
             methods: ["GET", "POST"],
         },
       });

@@ -7,7 +7,7 @@ export async function revertRepo(commitID) {
 
     try {
         const res = await fetch(
-            `http://localhost:3000/repo/revert/${commitID}`
+            `${process.env.SERVER_URL}/revert/${commitID}`
         );
 
         const data = await res.json();
