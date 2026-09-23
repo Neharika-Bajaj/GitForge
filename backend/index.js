@@ -1,5 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -20,6 +22,13 @@ import { pushRepo } from "./controllers/push.js";
 import { revertRepo } from "./controllers/revert.js";
 import { loginRepo } from "./controllers/login.js";
 import { remoteRepo } from "./controllers/remote.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({
+    path: path.join(__dirname, ".env")
+});
 
 dotenv.config(); //get values from env file
 
