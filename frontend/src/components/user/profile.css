@@ -1,23 +1,26 @@
 .profile-page-wrapper {
   display: flex;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   min-height: 100vh;
   color: whitesmoke;
-  width: 100%;
-  /* flex-wrap: wrap; */
 }
 
 .user-profile-section {
-  width: 250px;
-  /* min-height: 100vh; */
+  flex: 0 0 250px;
   display: flex;
   flex-direction: column;
   padding: 40px 10px;
+  box-sizing: border-box;
 }
 
 .user-repo-section {
-  margin: 0px auto;
+  flex: 1;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
 }
 
 .user-name {
