@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../../authContext";
+import {useNavigate} from "react-router-dom"
 import "./auth.css";
 import { Button } from "@primer/react";
 import logo from "../../assets/github-mark-white.svg";
@@ -12,6 +13,7 @@ const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate= useNavigate();
 
     const {setCurrentUser} = useAuth();
 
@@ -32,7 +34,7 @@ const Signup = () => {
             setCurrentUser(res.data.userId);
             setLoading(false);
 
-            window.location.href = '/';
+            navigate("/");
         } catch (err) {
             console.error(err);
             alert("Signup Failed");

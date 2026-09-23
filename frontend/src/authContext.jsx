@@ -13,7 +13,7 @@ export const AuthProvider =({children})=>{
         if(userId){
             setCurrentUser(userId);
         }
-    },[]);
+    },[]); //empty array means run effect only once after initial render
 
     const value={
         currentUser,setCurrentUser

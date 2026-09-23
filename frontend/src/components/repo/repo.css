@@ -1,0 +1,266 @@
+.repo-container {
+  width: 900px;
+  max-width: 95vw;
+  margin: 30px auto;
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.create-repo-box {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.create-repo-box h2 {
+  color: #f0f6fc;
+  margin-top: 0;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 12px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #f0f6fc;
+  font-size: 0.95rem;
+}
+
+.form-group .form-hint {
+  font-size: 0.85rem;
+  color: #8b949e;
+  margin-top: 4px;
+}
+
+.repo-input {
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #f0f6fc;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+}
+
+.repo-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #f0f6fc;
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  resize: vertical;
+  min-height: 80px;
+}
+
+.repo-input:focus,
+.repo-textarea:focus {
+  border-color: #58a6ff;
+  outline: none;
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.radio-option input[type="radio"] {
+  margin-top: 4px;
+}
+
+.repo-btn-primary {
+  background-color: #238636;
+  color: #ffffff;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.repo-btn-primary:hover:not(:disabled) {
+  background-color: #2ea043;
+}
+
+.repo-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error-banner {
+  background-color: rgba(248, 81, 73, 0.15);
+  border: 1px solid #f85149;
+  color: #f85149;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+/* Repo Details Page */
+.repo-header {
+  margin-bottom: 24px;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 16px;
+}
+
+.repo-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.repo-title-row h1 {
+  font-size: 1.6rem;
+  color: #58a6ff;
+  margin: 0;
+}
+
+.visibility-badge {
+  font-size: 0.75rem;
+  border: 1px solid #30363d;
+  border-radius: 2em;
+  padding: 2px 8px;
+  color: #8b949e;
+  font-weight: 500;
+}
+
+.repo-desc {
+  color: #8b949e;
+  margin-top: 8px;
+  font-size: 0.95rem;
+}
+
+.repo-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #21262d;
+}
+
+.repo-tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #8b949e;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.repo-tab-btn:hover {
+  color: #c9d1d9;
+  border-color: transparent;
+}
+
+.repo-tab-btn.active {
+  color: #f0f6fc;
+  border-bottom: 2px solid #f78166;
+}
+
+/* Commit List */
+.commit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.commit-card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.commit-card h4 {
+  margin: 0 0 6px 0;
+  color: #f0f6fc;
+  font-size: 1rem;
+}
+
+.commit-meta {
+  font-size: 0.85rem;
+  color: #8b949e;
+  margin: 0;
+}
+
+.commit-hash {
+  font-family: monospace;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #58a6ff;
+  font-size: 0.85rem;
+}
+
+/* File Explorer */
+.file-list {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-bottom: 1px solid #21262d;
+  color: #c9d1d9;
+}
+
+.file-item:last-child {
+  border-bottom: none;
+}
+
+.file-item:hover {
+  background-color: #1c2128;
+}
+
+.file-icon {
+  color: #8b949e;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #8b949e;
+  background-color: #161b22;
+  border: 1px dashed #30363d;
+  border-radius: 6px;
+}
+
+.empty-state code {
+  background-color: #0d1117;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #58a6ff;
+}

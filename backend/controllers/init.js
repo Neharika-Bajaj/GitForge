@@ -1,24 +1,38 @@
-import fs from "fs/promises"; //fs:file system
+import fs from "fs/promises";
 import path from "path";
 
-export async function initRepo(){
-    const repoPath= path.resolve(process.cwd(), ".NB-Git"); //creates a hidden folder, cwd: current working directory
-    const commitsPath= path.join(repoPath,"commits");//commits is inside NB-Git so it is also indirectly hidden
+export async function initRepo() {
+    const repoPath = path.resolve(process.cwd(), ".NB-Git");
+    const commitsPath = path.join(repoPath, "commits");
+    const stagingPath = path.join(repoPath, "staging");
 
-    try{
+    try {
+        await fs.mkdir(repoPath, { recursive: true });
+        await fs.mkdir(commitsPath, { recursive: true });
+        await fs.mkdir(stagingPath, { recursive: true });
 
-        await fs.mkdir(repoPath,{recursive:true}); //recursive allows nesting of folders
-        await fs.mkdir(commitsPath, {recursive:true});
+        const configPath = path.join(repoPath, "config.json");
+
+        const config = {
+            vcs: "GitForge",
+            version: "1.0",
+            initializedAt: new Date().toISOString(),
+            repositoryId: null,
+            serverUrl: process.env.SERVER_URL || null
+        };
+
         await fs.writeFile(
-            path.join(repoPath, "config.json"),
-            JSON.stringify({bucket: process.env.S3_BUCKET})
+            configPath,
+            JSON.stringify(config, null, 2)
         );
 
-        console.log("Repository initialized");
+        console.log("GitForge repository initialized successfully.");
+        console.log(`Repository path: ${repoPath}`);
 
-
-    }catch(err){
-        console.log("Error initializing repository :", err);
+    } catch (err) {
+        console.error(
+            "Error initializing repository:",
+            err
+        );
     }
-
 }

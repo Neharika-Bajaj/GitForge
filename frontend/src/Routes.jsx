@@ -1,16 +1,19 @@
 import React, { useEffect } from "react";
-import { useNavigate, useRoutes } from 'react-router-dom'
+import { useNavigate, useRoutes, useLocation } from 'react-router-dom';
 
 import Dashboard from "./components/dashboard/Dashboard";
 import Profile from "./components/user/Profile";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import CreateRepo from "./components/repo/CreateRepo";
+import RepoDetails from "./components/repo/RepoDetails";
 
 import { useAuth } from "./authContext";
 
 const ProjectRoutes = () => {
     const { currentUser, setCurrentUser } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const userIdFromStorage = localStorage.getItem("userId");
@@ -19,16 +22,16 @@ const ProjectRoutes = () => {
             setCurrentUser(userIdFromStorage);
         }
 
-        if (!userIdFromStorage && !["/auth", "/signup"].includes(window.location.pathname)) {
+        if (!userIdFromStorage && !["/auth", "/signup"].includes(location.pathname)) {  //route protection
             navigate("/auth");
         }
 
-        if (userIdFromStorage && window.location.pathname == '/auth') {
+        if (userIdFromStorage && ["/auth", "/signup"].includes(location.pathname)) {
             navigate("/");
         }
-    }, [currentUser, navigate, setCurrentUser]);
+    }, [currentUser, navigate, setCurrentUser, location.pathname]);
 
-    let element = useRoutes([
+    let element = useRoutes([    //creates routing table
         {
             path: "/",
             element: <Dashboard />
@@ -44,6 +47,14 @@ const ProjectRoutes = () => {
         {
             path: "/profile",
             element: <Profile />
+        },
+        {
+            path: "/create",
+            element: <CreateRepo />
+        },
+        {
+            path: "/repo/:id",
+            element: <RepoDetails />
         }
     ]);
     return element;

@@ -9,7 +9,7 @@ const Navbar = () => {
                 <div>
 
                     <img src="https://www.github.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" />
-                    <h3>GitHub</h3>
+                    <h3>GitForge</h3>
 
                 </div>
             </Link>

@@ -1,4 +1,3 @@
-import { ADDRGETNETWORKPARAMS } from "dns/promises";
 import fs from "fs/promises";
 import path from "path";
 
@@ -8,7 +7,7 @@ export async function addRepo(filePath){
 
     try{
         await fs.mkdir(stagingPath, {recursive:true});
-        const fileName= path.basename(filePath);
+        const fileName= path.basename(filePath);//extracting file name from file path
         await fs.copyFile(filePath, path.join(stagingPath, fileName));
         console.log(`File ${fileName} added to the staging area!`);
 

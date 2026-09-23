@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./dashboard.css";
 import Navbar from "../Navbar";
 
@@ -7,32 +8,48 @@ const Dashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestedRepositories, setSuggestedRepositories] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const userId = localStorage.getItem("userId");
+    const token = localStorage.getItem("token");
 
     const fetchRepositories = async () => {
       try {
+        const headers = {};
+        if (token) {
+          headers["Authorization"] = `Bearer ${token}`;
+        }
+
         const response = await fetch(
-  `${import.meta.env.VITE_API_URL}/repo/user/${userId}`
-);
-        const data = await response.json();
-        setRepositories(data.repositories);
+          `${import.meta.env.VITE_API_URL}/repo/user`,
+          { headers }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setRepositories(Array.isArray(data.repositories) ? data.repositories : []);
+        } else {
+          setRepositories([]);
+        }
       } catch (err) {
-        console.error("Error while fecthing repositories: ", err);
+        console.error("Error while fetching repositories: ", err);
+        setRepositories([]);
       }
     };
 
     const fetchSuggestedRepositories = async () => {
       try {
-       const response = await fetch(
-  `${import.meta.env.VITE_API_URL}/repo/all`
-);
-        const data = await response.json();
-        setSuggestedRepositories(data);
-        console.log(suggestedRepositories);
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/repo/all`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setSuggestedRepositories(Array.isArray(data) ? data : []);
+        } else {
+          setSuggestedRepositories([]);
+        }
       } catch (err) {
-        console.error("Error while fecthing repositories: ", err);
+        console.error("Error while fetching suggested repositories: ", err);
+        setSuggestedRepositories([]);
       }
     };
 
@@ -41,11 +58,15 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    if (searchQuery == "") {
-      setSearchResults(repositories);
+    const safeRepos = Array.isArray(repositories) ? repositories : [];
+    if (searchQuery.trim() === "") {
+      setSearchResults(safeRepos);
     } else {
-      const filteredRepo = repositories.filter((repo) =>
-        repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const filteredRepo = safeRepos.filter(
+        (repo) =>
+          repo &&
+          repo.name &&
+          repo.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setSearchResults(filteredRepo);
     }
@@ -59,15 +80,27 @@ const Dashboard = () => {
           <h3>Suggested Repositories</h3>
           {suggestedRepositories.map((repo) => {
             return (
-              <div key={repo._id}>
+              <div
+                key={repo._id}
+                className="repo-card"
+                onClick={() => navigate(`/repo/${repo._id}`)}
+              >
                 <h4>{repo.name}</h4>
-                <h4>{repo.description}</h4>
+                <p>{repo.description || "No description provided."}</p>
               </div>
             );
           })}
         </aside>
         <main>
-          <h2>Your Repositories</h2>
+          <div className="main-header">
+            <h2>Your Repositories</h2>
+            <button
+              className="create-repo-btn"
+              onClick={() => navigate("/create")}
+            >
+              New Repository
+            </button>
+          </div>
           <div id="search">
             <input
               type="text"
@@ -78,9 +111,13 @@ const Dashboard = () => {
           </div>
           {searchResults.map((repo) => {
             return (
-              <div key={repo._id}>
+              <div
+                key={repo._id}
+                className="repo-card"
+                onClick={() => navigate(`/repo/${repo._id}`)}
+              >
                 <h4>{repo.name}</h4>
-                <h4>{repo.description}</h4>
+                <p>{repo.description || "No description provided."}</p>
               </div>
             );
           })}

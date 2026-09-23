@@ -29,7 +29,7 @@ const UserSchema= new Schema({
             ref:"User",
         },
      ],
-     starRepo:[
+     starRepos:[
         {
             default:[],
             type:Schema.Types.ObjectId,

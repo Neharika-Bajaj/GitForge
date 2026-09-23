@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./profile.css";
 import Navbar from "../Navbar";
@@ -9,7 +8,6 @@ import { useAuth } from "../../authContext";
 import HeatMapProfile from "./HeatMap";
 
 const Profile = () => {
-  const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({username: "username"});
   const {setCurrentUser} =useAuth();
 
@@ -26,6 +24,7 @@ const Profile = () => {
             }
         }
     };
+    fetchUserDetails();
   }, []);
 
   return (
@@ -48,15 +47,11 @@ const Profile = () => {
         </UnderlineNav.Item>
 
         <UnderlineNav.Item
-          onClick={() => navigate("/repo")}
           icon={RepoIcon}
           sx={{
             backgroundColor: "transparent",
             color: "whitesmoke",
-            "&:hover": {
-              textDecoration: "underline",
-              color: "white",
-            },
+            cursor: "default",
           }}
         >
           Starred Repositories

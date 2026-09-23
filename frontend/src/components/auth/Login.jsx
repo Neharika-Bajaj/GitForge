@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate} from 'react-router-dom'
 import { useAuth } from "../../authContext";
 import { Button } from "@primer/react";
 import "./auth.css";
@@ -13,6 +14,7 @@ const Login = () => {
       const [password, setPassword] = useState("");
       const [loading, setLoading] =useState(false);
       const {setCurrentUser} = useAuth();
+      const navigate = useNavigate();
 
       const handleLogin = async (e)=>{
         e.preventDefault();
@@ -30,7 +32,7 @@ const Login = () => {
             setCurrentUser(res.data.userId);
             setLoading(false);
 
-            window.location.href= '/';
+            navigate("/");
 
         }catch(err){
             console.error(err);
@@ -88,7 +90,7 @@ const Login = () => {
         </div>
         <div className="pass-box">
           <p>
-            New to GitHub? <Link to="/signup">Create an account</Link>
+            New to GitForge? <Link to="/signup">Create an account</Link>
           </p>
         </div>
       </div>

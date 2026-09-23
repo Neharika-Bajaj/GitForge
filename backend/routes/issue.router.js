@@ -1,16 +1,41 @@
 import express from "express";
+
 import {
     createIssue,
     updateIssueByID,
     deleteIssueByID,
     getAllIssues,
-    getIssueByID 
+    getIssueByID
 } from "../controllers/issueController.js";
+
+import { authMiddleware } from "../middleware/authMiddleware.js";
 
 export const issueRouter = express.Router();
 
-issueRouter.post("/issue/create",createIssue);
-issueRouter.put("/issue/update/:id",updateIssueByID);
-issueRouter.delete("/issue/delete/:id",deleteIssueByID);
-issueRouter.get("/issues/all",getAllIssues);
-issueRouter.get("/issue/:id",getIssueByID);
+issueRouter.post(
+    "/repo/:id/issue",
+    authMiddleware,
+    createIssue
+);
+
+issueRouter.put(
+    "/issue/update/:id",
+    authMiddleware,
+    updateIssueByID
+);
+
+issueRouter.delete(
+    "/issue/delete/:id",
+    authMiddleware,
+    deleteIssueByID
+);
+
+issueRouter.get(
+    "/repo/:id/issues",
+    getAllIssues
+);
+
+issueRouter.get(
+    "/issue/:id",
+    getIssueByID
+);
