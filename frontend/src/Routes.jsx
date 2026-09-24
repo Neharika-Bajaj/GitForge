@@ -7,6 +7,8 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import CreateRepo from "./components/repo/CreateRepo";
 import RepoDetails from "./components/repo/RepoDetails";
+import CreateIssue from "./components/issue/CreateIssue";
+import IssueDetails from "./components/issue/IssueDetails";
 
 import { useAuth } from "./authContext";
 
@@ -55,6 +57,18 @@ const ProjectRoutes = () => {
         {
             path: "/repo/:id",
             element: <RepoDetails />
+        },
+        {
+            path: "/repo/:id/issues",
+            element: <RepoDetails defaultTab="issues" />
+        },
+        {
+            path: "/repo/:id/issues/new",
+            element: <CreateIssue />
+        },
+        {
+            path: "/issue/:issueId",
+            element: <IssueDetails />
         }
     ]);
     return element;

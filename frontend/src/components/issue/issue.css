@@ -1,0 +1,192 @@
+/* Simple GitForge Issue Styling */
+
+.issue-container {
+  width: 900px;
+  max-width: 95vw;
+  margin: 30px auto;
+  color: #c9d1d9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.issue-nav-back {
+  margin-bottom: 20px;
+}
+
+.issue-nav-back a {
+  color: #58a6ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.issue-nav-back a:hover {
+  text-decoration: underline;
+}
+
+/* Issue List View */
+.issues-container {
+  margin-top: 10px;
+}
+
+.issues-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.issue-list {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.issue-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid #21262d;
+}
+
+.issue-item:last-child {
+  border-bottom: none;
+}
+
+.issue-item:hover {
+  background-color: #1c2128;
+}
+
+.issue-title {
+  color: #f0f6fc;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.issue-title:hover {
+  color: #58a6ff;
+}
+
+.issue-desc {
+  color: #8b949e;
+  font-size: 0.88rem;
+  margin: 6px 0 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 650px;
+}
+
+/* Status Badges */
+.issue-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 2em;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.issue-status.open {
+  background-color: rgba(35, 134, 54, 0.2);
+  color: #3fb950;
+  border: 1px solid #238636;
+}
+
+.issue-status.closed {
+  background-color: rgba(130, 80, 223, 0.2);
+  color: #a371f7;
+  border: 1px solid #8250df;
+}
+
+/* Card / Form Container */
+.issue-form-card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.issue-form-card h2 {
+  color: #f0f6fc;
+  margin-top: 0;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 12px;
+}
+
+/* Issue Details View */
+.issue-details-card {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.issue-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-bottom: 1px solid #21262d;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.issue-details-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.issue-details-title-row h2 {
+  color: #f0f6fc;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.issue-details-desc {
+  color: #c9d1d9;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin-bottom: 24px;
+}
+
+.issue-details-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.issue-btn-secondary {
+  background-color: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.issue-btn-secondary:hover:not(:disabled) {
+  background-color: #30363d;
+  color: #f0f6fc;
+}
+
+.issue-btn-danger {
+  background-color: transparent;
+  color: #f85149;
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.issue-btn-danger:hover:not(:disabled) {
+  background-color: rgba(248, 81, 73, 0.15);
+  border-color: #f85149;
+}

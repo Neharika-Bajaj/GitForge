@@ -1,70 +1,81 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import Navbar from "../Navbar";
+import IssueList from "../issue/IssueList";
 import "./repo.css";
 
-const RepoDetails = () => {
+const RepoDetails = ({ defaultTab = "code" }) => {
   const { id } = useParams();
+  const location = useLocation();
+  const isIssuesPath = location.pathname.endsWith("/issues");
+
   const [repository, setRepository] = useState(null);
   const [commits, setCommits] = useState([]);
-  const [activeTab, setActiveTab] = useState("code");
+  const [activeTab, setActiveTab] = useState(isIssuesPath ? "issues" : defaultTab);
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  useEffect(() => {
+  const fetchRepoData = useCallback(async () => {
     const token = localStorage.getItem("token");
+    try {
+      setLoading(true);
+      setError("");
 
-    const fetchRepoData = async () => {
-      try {
-        setLoading(true);
-        setError("");
-
-        // Fetch repository info
-        const repoRes = await fetch(
-          `${import.meta.env.VITE_API_URL}/repo/${id}`,
-          {
-            headers: token ? { Authorization: `Bearer ${token}` } : {},
-          }
-        );
-
-        if (!repoRes.ok) {
-          const errData = await repoRes.json().catch(() => ({}));
-          setError(errData.error || "Repository not found");
-          setLoading(false);
-          return;
+      // Fetch repository info
+      const repoRes = await fetch(
+        `${import.meta.env.VITE_API_URL}/repo/${id}`,
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
         }
+      );
 
-        const repoData = await repoRes.json();
-        setRepository(repoData);
-
-        // Fetch commits for this repository
-        const commitsRes = await fetch(
-          `${import.meta.env.VITE_API_URL}/repo/${id}/commits`,
-          {
-            headers: token ? { Authorization: `Bearer ${token}` } : {},
-          }
-        );
-
-        if (commitsRes.ok) {
-          const commitsData = await commitsRes.json();
-          setCommits(Array.isArray(commitsData.commits) ? commitsData.commits : []);
-        } else {
-          setCommits([]);
-        }
-
+      if (!repoRes.ok) {
+        const errData = await repoRes.json().catch(() => ({}));
+        setError(errData.error || "Repository not found");
         setLoading(false);
-      } catch (err) {
-        console.error("Error fetching repository details:", err);
-        setError("Failed to load repository details.");
-        setLoading(false);
+        return;
       }
-    };
 
+      const repoData = await repoRes.json();
+      setRepository(repoData);
+
+      // Fetch commits for this repository
+      const commitsRes = await fetch(
+        `${import.meta.env.VITE_API_URL}/repo/${id}/commits`,
+        {
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        }
+      );
+
+      if (commitsRes.ok) {
+        const commitsData = await commitsRes.json();
+        setCommits(Array.isArray(commitsData.commits) ? commitsData.commits : []);
+      } else {
+        setCommits([]);
+      }
+
+      setLoading(false);
+    } catch (err) {
+      console.error("Error fetching repository details:", err);
+      setError("Failed to load repository details.");
+      setLoading(false);
+    }
+  }, [id]);
+
+  useEffect(() => {
     if (id) {
       fetchRepoData();
     }
-  }, [id]);
+  }, [id, fetchRepoData]);
+
+  useEffect(() => {
+    if (location.pathname.endsWith("/issues")) {
+      setActiveTab("issues");
+    } else if (defaultTab && !location.pathname.endsWith("/issues")) {
+      setActiveTab(defaultTab);
+    }
+  }, [location.pathname, defaultTab]);
 
   // Decode file content safely from base64 (UTF-8 robust)
   const decodeContent = (content) => {
@@ -124,6 +135,12 @@ const RepoDetails = () => {
                 onClick={() => setActiveTab("commits")}
               >
                 Commits ({commits.length})
+              </button>
+              <button
+                className={`repo-tab-btn ${activeTab === "issues" ? "active" : ""}`}
+                onClick={() => setActiveTab("issues")}
+              >
+                Issues
               </button>
             </div>
 
@@ -227,6 +244,10 @@ node index.js push`}
                   </div>
                 )}
               </div>
+            )}
+
+            {activeTab === "issues" && (
+              <IssueList repositoryId={id} />
             )}
           </>
         )}
