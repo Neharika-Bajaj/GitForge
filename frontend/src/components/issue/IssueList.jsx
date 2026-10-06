@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./issue.css";
+import PropTypes from "prop-types";
 
 const IssueList = ({ repositoryId }) => {
   const [issues, setIssues] = useState([]);
@@ -82,6 +83,10 @@ const IssueList = ({ repositoryId }) => {
       )}
     </div>
   );
+};
+
+IssueList.propTypes = {
+  repositoryId: PropTypes.string.isRequired,
 };
 
 export default IssueList;

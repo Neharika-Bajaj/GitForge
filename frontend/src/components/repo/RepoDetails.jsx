@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import Navbar from "../Navbar";
 import IssueList from "../issue/IssueList";
+import PropTypes from "prop-types";
 import "./repo.css";
 
 const RepoDetails = ({ defaultTab = "code" }) => {
@@ -254,6 +255,10 @@ node index.js push`}
       </div>
     </>
   );
+};
+
+RepoDetails.propTypes = {
+    defaultTab: PropTypes.string,
 };
 
 export default RepoDetails;
